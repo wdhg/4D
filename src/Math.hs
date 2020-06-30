@@ -1,5 +1,5 @@
-type Vector
-  = [Double]
+newtype Vector
+  = Vector [Double]
 
-type Matrix
-  = [Vector]
+newtype Matrix
+  = Matrix [Vector]
