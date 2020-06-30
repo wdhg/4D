@@ -23,6 +23,12 @@ instance Nums Vector where
   scale scalar (Vector xs)
     = Vector $ map (* scalar) xs
 
+  neg vector
+    = scale (-1) vector
+
+  sub vector1 vector2
+    = add vector1 (neg vector2)
+
 newtype Matrix
   = Matrix [Vector]
 
