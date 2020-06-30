@@ -1,8 +1,8 @@
 class Nums a where
   add :: a -> a -> a
-  sub :: a -> a -> a
   scale :: Double -> a -> a
   neg :: a -> a
+  sub :: a -> a -> a
 
 
 newtype Vector
@@ -31,4 +31,3 @@ instance Nums Vector where
 
 newtype Matrix
   = Matrix [Vector]
-
