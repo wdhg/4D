@@ -20,6 +20,8 @@ instance Nums Vector where
         add' (x:xs) (y:ys)
           = (x + y) : add' xs ys
 
+  scale scalar (Vector xs)
+    = Vector $ map (* scalar) xs
 
 newtype Matrix
   = Matrix [Vector]
