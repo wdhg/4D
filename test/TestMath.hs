@@ -1,25 +1,29 @@
 module TestMath (tests) where
 
-import Test.HUnit
 import Math
+import Test.HUnit
 
-vector1, vector2, vector3, vector4, vector5 :: Vector
-vector1 = Vector [1,2,3]
-vector2 = Vector [4,5,6]
-vector3 = Vector [2,3,4,5]
-vector4 = Vector [5,7,9]
-vector5 = Vector [3,5,7,5]
+vec :: [Double] -> Vector
+vec = Vector
 
 addTests :: Test
 addTests
   = TestList
-  [ add vector1 vector2 ~?= vector4
-  , add vector1 vector3 ~?= vector5
-  ]
+    [ add (vec [0,1,2]) (vec [4,5,6]) ~?= (vec [4,6,8])
+    , add (vec [1,2]) (vec [1,2,3,4]) ~?= (vec [2,4,3,4])
+    ]
+
+scaleTests :: Test
+scaleTests
+  = TestList
+    [ scale 1 (vec [1,2,3]) ~?= (vec [1,2,3])
+    , scale 2 (vec [1,2,3]) ~?= (vec [2,4,6])
+    , scale (-10) (vec [1,2,3]) ~?= (vec [-10,-20,-30])
+    ]
 
 tests :: Test
 tests
   = TestList
-    [ "addTest" ~: addTest
+    [ "add" ~: addTests
+    , "scale" ~: scaleTests
     ]
-

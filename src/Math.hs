@@ -1,3 +1,5 @@
+module Math where
+
 class Nums a where
   add :: a -> a -> a
   scale :: Double -> a -> a
@@ -28,6 +30,19 @@ instance Nums Vector where
 
   sub vector1 vector2
     = add vector1 (neg vector2)
+
+instance Eq Vector where
+  vector1 == vector2
+    = all ((< threshold) . abs) xs
+      where
+        threshold
+          = 0.0000001
+        Vector xs
+          = vector1 `sub` vector2
+
+instance Show Vector where
+  show (Vector xs)
+    = show xs
 
 newtype Matrix
   = Matrix [Vector]
