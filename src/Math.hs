@@ -51,3 +51,12 @@ instance Nums Matrix where
   add (Matrix (m1, n1) xs) (Matrix (m2, n2) ys)
     | m1 != m2 || n1 != n2  = error "cannot add different dimension matrices"
     | otherwise             = Matrix $ zipWith add xs ys
+
+  scale scalar (Matrix _ xs)
+    = Matrix $ map (scale scalar) xs
+
+  neg (Matrix xs)
+    = Matrix $ map neg xs
+
+  sub matrix1 matrix2
+    = add matrix1 (neg matrix2)
