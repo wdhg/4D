@@ -45,4 +45,9 @@ instance Show Vector where
     = show xs
 
 newtype Matrix
-  = Matrix [Vector]
+  = Matrix (Int, Int) [Vector]
+
+instance Nums Matrix where
+  add (Matrix (m1, n1) xs) (Matrix (m2, n2) ys)
+    | m1 != m2 || n1 != n2  = error "cannot add different dimension matrices"
+    | otherwise             = Matrix $ zipWith add xs ys
