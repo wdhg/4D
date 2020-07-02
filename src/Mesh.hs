@@ -1,4 +1,7 @@
-module Mesh (Verticies, Edges, Mesh(..), saveMesh, loadMesh) where
+module Mesh
+  ( Verticies, Edges, Mesh(..)
+  , marshalMesh, unmarshalMesh, saveMesh, loadMesh
+  ) where
 
 import Math
 
@@ -11,10 +14,20 @@ type Edges
 data Mesh
   = Mesh Verticies Edges
 
-saveMesh :: String -> Mesh -> IO ()
-saveMesh filename (Mesh verticies edges)
+marshalMesh :: Mesh -> String
+marshalMesh mesh
   = undefined
+
+unmarshalMesh :: String -> Mesh
+unmarshalMesh text
+  = undefined
+
+saveMesh :: String -> Mesh -> IO ()
+saveMesh filename mesh
+  = writeFile filename (marshalMesh mesh)
 
 loadMesh :: String -> IO Mesh
 loadMesh filename
-  = undefined
+  = do
+    text <- readFile filename
+    return $ unmarshalMesh text
