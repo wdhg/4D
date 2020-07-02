@@ -11,8 +11,8 @@ type Edges
 data Mesh
   = Mesh Verticies Edges
 
-saveMesh :: Mesh -> IO ()
-saveMesh (Mesh verticies edges)
+saveMesh :: String -> Mesh -> IO ()
+saveMesh filename (Mesh verticies edges)
   = undefined
 
 loadMesh :: String -> IO Mesh
