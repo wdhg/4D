@@ -21,6 +21,13 @@ scaleTests
     , scale (-10) (vec [1,2,3]) ~?= (vec [-10,-20,-30])
     ]
 
+negTests :: Test
+negTests
+  = TestList
+    [ neg (vec [4,5,6]) ~?= (vec [-4,-5,-6])
+    , neg (vec [1,-2,3]) ~?= (vec [-1,2,-3])
+    ]
+
 tests :: Test
 tests
   = TestList
