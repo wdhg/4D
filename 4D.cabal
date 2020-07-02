@@ -27,6 +27,7 @@ library
   exposed-modules:
       Lib
       Math
+      Mesh
   other-modules:
       Paths_4D
   hs-source-dirs:
