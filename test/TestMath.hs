@@ -28,9 +28,18 @@ negTests
     , neg (vec [1,-2,3]) ~?= (vec [-1,2,-3])
     ]
 
+subTests :: Test
+subTests
+  = TestList
+    [ sub (vec [1,2,3]) (vec [4,5,6]) ~?= (vec [-3,-3,-3])
+    , sub (vec [-1,-2,-3]) (vec [-10,-20,-30]) ~?= (vec [9, 18, 27])
+    ]
+
 tests :: Test
 tests
   = TestList
     [ "add" ~: addTests
     , "scale" ~: scaleTests
+    , "neg" ~: negTests
+    , "sub" ~: subTests
     ]
