@@ -1,4 +1,4 @@
-module Mesh (..)
+module Mesh (Verticies, Edges, Mesh(..), saveMesh, loadMesh) where
 
 import Math
 
