@@ -60,3 +60,12 @@ instance Nums Matrix where
 
   sub matrix1 matrix2
     = add matrix1 (neg matrix2)
+
+instance Eq Matrix where
+  Matrix (m1, n1) xs == Matrix (m2, n2) ys
+    = m1 == m2 && n1 == n2 && ( and $ zipWith (==) xs ys )
+
+instance Show Matrix where
+  show (Matrix _ xs)
+    = show xs
+
