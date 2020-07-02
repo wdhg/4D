@@ -38,8 +38,8 @@ subTests
 tests :: Test
 tests
   = TestList
-    [ "add" ~: addTests
-    , "scale" ~: scaleTests
-    , "neg" ~: negTests
-    , "sub" ~: subTests
+    [ "Vector add" ~: addTests
+    , "Vector scale" ~: scaleTests
+    , "Vector neg" ~: negTests
+    , "Vector sub" ~: subTests
     ]
