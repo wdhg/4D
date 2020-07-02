@@ -44,19 +44,19 @@ instance Show Vector where
   show (Vector xs)
     = show xs
 
-newtype Matrix
+data Matrix
   = Matrix (Int, Int) [Vector]
 
 instance Nums Matrix where
   add (Matrix (m1, n1) xs) (Matrix (m2, n2) ys)
-    | m1 != m2 || n1 != n2  = error "cannot add different dimension matrices"
-    | otherwise             = Matrix $ zipWith add xs ys
+    | m1 /= m2 || n1 /= n2  = error "cannot add different dimension matrices"
+    | otherwise             = Matrix (m1, n1) (zipWith add xs ys)
 
-  scale scalar (Matrix _ xs)
-    = Matrix $ map (scale scalar) xs
+  scale scalar (Matrix dim xs)
+    = Matrix dim (map (scale scalar) xs)
 
-  neg (Matrix xs)
-    = Matrix $ map neg xs
+  neg (Matrix dim xs)
+    = Matrix dim (map neg xs)
 
   sub matrix1 matrix2
     = add matrix1 (neg matrix2)
