@@ -10,8 +10,11 @@ import Math
 type Verticies
   = [Vector]
 
+type Edge
+  = (Int, Int)
+
 type Edges
-  = [(Int, Int)]
+  = [Edge]
 
 data Mesh
   = Mesh Verticies Edges
@@ -38,7 +41,7 @@ marshalVertex :: Vector -> String
 marshalVertex (Vector xs)
   = unwords $ map show xs
 
-marshalEdge :: (Int, Int) -> String
+marshalEdge :: Edge -> String
 marshalEdge (index1, index2)
   = show index1 ++ (' ' : show index2)
 
