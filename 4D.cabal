@@ -34,6 +34,7 @@ library
       src
   build-depends:
       base >=4.7 && <5
+    , split
   default-language: Haskell2010
 
 executable 4D-exe
@@ -46,6 +47,7 @@ executable 4D-exe
   build-depends:
       4D
     , base >=4.7 && <5
+    , split
   default-language: Haskell2010
 
 test-suite 4D-test
@@ -62,4 +64,5 @@ test-suite 4D-test
       4D
     , HUnit
     , base >=4.7 && <5
+    , split
   default-language: Haskell2010

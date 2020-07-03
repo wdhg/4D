@@ -1,8 +1,10 @@
 module Mesh
   ( Verticies, Edges, Mesh(..)
-  , tesseract, marshalMesh, unmarshalMesh, saveMesh, loadMesh
+  , tesseract, marshalMesh, unmarshalVertices, unmarshalMesh, saveMesh, loadMesh
   ) where
 
+import Data.List.Split (splitOn)
+import Data.Maybe      (isNothing, listToMaybe)
 import Math
 
 type Verticies
@@ -49,7 +51,19 @@ marshalMesh (Mesh vertices edges)
       edgesText
         = unwords $ map marshalEdge edges
 
-unmarshalMesh :: String -> Mesh
+readMaybe :: Read a => String -> Maybe a
+readMaybe
+  = fmap fst . listToMaybe . reads
+
+unmarshalVertex :: String -> Maybe Vector
+unmarshalVertex
+  = fmap Vector . sequence . map readMaybe . words
+
+unmarshalVertices :: String -> Maybe [Vector]
+unmarshalVertices
+  = sequence . map unmarshalVertex . splitOn ","
+
+unmarshalMesh :: String -> Maybe Mesh
 unmarshalMesh text
   = undefined
 
@@ -57,7 +71,7 @@ saveMesh :: String -> Mesh -> IO ()
 saveMesh filename mesh
   = writeFile filename (marshalMesh mesh)
 
-loadMesh :: String -> IO Mesh
+loadMesh :: String -> IO (Maybe Mesh)
 loadMesh filename
   = do
     text <- readFile filename
