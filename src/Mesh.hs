@@ -28,9 +28,26 @@ tesseract
     , (4,12), (5,13), (6,14), (7,15)
     ]
 
+commaJoin :: [String] -> String
+commaJoin (x:xs)
+  = x ++ (concatMap (", " ++) xs)
+
+marshalVertex :: Vector -> String
+marshalVertex (Vector xs)
+  = unwords $ map show xs
+
+marshalEdge :: (Int, Int) -> String
+marshalEdge (index1, index2)
+  = show index1 ++ (' ' : show index2)
+
 marshalMesh :: Mesh -> String
-marshalMesh mesh
-  = undefined
+marshalMesh (Mesh vertices edges)
+  = verticesText ++ ('\n' : edgesText)
+    where
+      verticesText
+        = commaJoin $ map marshalVertex vertices
+      edgesText
+        = unwords $ map marshalEdge edges
 
 unmarshalMesh :: String -> Mesh
 unmarshalMesh text

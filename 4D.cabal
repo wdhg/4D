@@ -53,6 +53,7 @@ test-suite 4D-test
   main-is: Spec.hs
   other-modules:
       TestMath
+      TestMesh
       Paths_4D
   hs-source-dirs:
       test
