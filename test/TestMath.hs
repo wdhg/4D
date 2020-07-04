@@ -42,7 +42,13 @@ matAddTests
         (Matrix (2, 2) [(vec [1, 2]), (vec [3, 4])])
         (Matrix (2, 2) [(vec [5, 6]), (vec [7, 8])])
       ~?= (Matrix (2, 2) [(vec [6, 8]), (vec [10, 12])])
+    , add
+        (Matrix (1, 3) [(vec [1]), (vec [1]), (vec [1])])
+        (Matrix (1, 3) [(vec [2]), (vec [4]), (vec [6])])
+      ~?= (Matrix (1, 3) [(vec [3]), (vec [5]), (vec [7])])
     ]
+
+
 
 tests :: Test
 tests
