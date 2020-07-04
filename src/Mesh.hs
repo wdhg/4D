@@ -3,6 +3,7 @@ module Mesh
   , tesseract, marshalMesh, unmarshalVertices, unmarshalMesh, saveMesh, loadMesh
   ) where
 
+import Control.Monad   (liftM2)
 import Data.List.Split (splitOn)
 import Data.Maybe      (isNothing, listToMaybe)
 import Math
@@ -58,13 +59,27 @@ readMaybe :: Read a => String -> Maybe a
 readMaybe
   = fmap fst . listToMaybe . reads
 
+unmarshalCommaSplit :: (String -> Maybe b) -> String -> Maybe [b]
+unmarshalCommaSplit func
+  = sequence . map func . splitOn ","
+
 unmarshalVertex :: String -> Maybe Vector
 unmarshalVertex
   = fmap Vector . sequence . map readMaybe . words
 
 unmarshalVertices :: String -> Maybe [Vector]
 unmarshalVertices
-  = sequence . map unmarshalVertex . splitOn ","
+  = unmarshalCommaSplit unmarshalVertex
+
+unmarshalEdge :: String -> Maybe Edge
+unmarshalEdge text
+  = case map readMaybe $ words text of
+      [x, y] -> liftM2 (,) x y
+      _      -> Nothing
+
+unmarshalEdges :: String -> Maybe Edges
+unmarshalEdges
+  = unmarshalCommaSplit unmarshalEdge
 
 unmarshalMesh :: String -> Maybe Mesh
 unmarshalMesh text
