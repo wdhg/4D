@@ -52,7 +52,7 @@ marshalMesh (Mesh vertices edges)
       verticesText
         = commaJoin $ map marshalVertex vertices
       edgesText
-        = unwords $ map marshalEdge edges
+        = commaJoin $ map marshalEdge edges
 
 readMaybe :: Read a => String -> Maybe a
 readMaybe
