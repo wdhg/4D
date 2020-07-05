@@ -6,7 +6,6 @@ class Nums a where
   neg :: a -> a
   sub :: a -> a -> a
 
-
 newtype Vector
   = Vector [Double]
 
