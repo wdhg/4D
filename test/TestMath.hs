@@ -57,6 +57,26 @@ matScaleTests
       ~?= (Matrix (1, 1) [(vec [6])])
     ]
 
+matNegTests :: Test
+matNegTests
+  = TestList
+    [ neg (Matrix (2, 2) [(vec [1, 2]), (vec [3, 4])])
+      ~?= (Matrix (2, 2) [(vec [-1, -2]), (vec [-3, -4])])
+    , neg (Matrix (1, 1) [(vec [4])])
+      ~?= (Matrix (1, 1) [(vec [-4])])
+    ]
+
+matSubTests :: Test
+matSubTests
+  = TestList
+    [ sub (Matrix (1, 1) [(vec [4])])
+          (Matrix (1, 1) [(vec [3])])
+      ~?= (Matrix (1, 1) [(vec [1])])
+    , sub (Matrix (3, 1) [(vec [3, 4, 5])])
+          (Matrix (3, 1) [(vec [1, 4, 7])])
+      ~?= (Matrix (3, 1) [(vec [2, 0, -2])])
+    ]
+
 
 tests :: Test
 tests
@@ -67,4 +87,6 @@ tests
     , "Vector sub" ~: vecSubTests
     , "Matrix add" ~: matAddTests
     , "Matrix scale" ~: matScaleTests
+    , "Matrix neg" ~: matNegTests
+    , "Matrix sub" ~: matSubTests
     ]
