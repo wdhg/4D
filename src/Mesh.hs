@@ -1,6 +1,6 @@
 module Mesh
   ( Verticies, Edges, Mesh(..)
-  , tesseract, marshalMesh, unmarshalVertices, unmarshalMesh, saveMesh, loadMesh
+  , tesseract, marshalMesh, unmarshalMesh, saveMesh, loadMesh
   ) where
 
 import Control.Monad   (liftM2)
@@ -83,7 +83,13 @@ unmarshalEdges
 
 unmarshalMesh :: String -> Maybe Mesh
 unmarshalMesh text
-  = undefined
+  = case splitOn "\n" text of
+      [verticesText, edgesText]
+        -> do
+          vertices <- unmarshalVertices verticesText
+          edges <- unmarshalEdges edgesText
+          return $ Mesh vertices edges
+      _                         -> Nothing
 
 saveMesh :: String -> Mesh -> IO ()
 saveMesh filename mesh
