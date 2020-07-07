@@ -68,3 +68,10 @@ instance Show Matrix where
   show (Matrix _ xs)
     = show xs
 
+dot :: Vector -> Vector -> Double
+dot (Vector xs) (Vector ys)
+  = sum $ zipWith (*) xs ys
+
+magnitude :: Vector -> Double
+magnitude (Vector xs)
+  = sqrt . sum $ map (^2) xs
