@@ -74,8 +74,8 @@ unmarshalVertices
 unmarshalEdge :: String -> Maybe Edge
 unmarshalEdge text
   = case map readMaybe $ words text of
-      [x, y] -> liftM2 (,) x y
-      _      -> Nothing
+      [maybeX, maybeY] -> liftM2 (,) maybeX maybeY
+      _                -> Nothing
 
 unmarshalEdges :: String -> Maybe Edges
 unmarshalEdges
